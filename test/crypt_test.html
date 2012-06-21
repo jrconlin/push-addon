@@ -6,6 +6,10 @@
         <link rel="stylesheet" href="style.css" type="text/css" />
     </head>
     <body>
+        <section id="install">
+        <h2>Whoops!</h2>
+        <p>Please make sure that the <a href="push-notifications.xpi" content-type="application/x-xpinstall">Notifications Plugin</a> is installed.<p>
+        </section>
         <section class="encrypted">
             <h2>Encrypted Stuff</h2>
             <p>This page attempts to send an encrypted message to itself. For added fun, open the debugging console.</p>
@@ -88,7 +92,7 @@
                 }
             }
             else {
-                alert('fail. Something went horribly wrong.');
+                document.getElementById('install').style.display='block';
             }
         }
 

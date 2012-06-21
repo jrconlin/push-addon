@@ -23,4 +23,11 @@ section {
 section.unencrypted, section.unencrypted input {
     color: #888;
 }
+section#install{
+    display:none;
+}
+section#install h2 {
+    color: red;
+}
+
 h2 {margin: 0; padding: 0; }
