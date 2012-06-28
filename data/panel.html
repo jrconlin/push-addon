@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Notification Center</title>
-    <link rel="stylesheet" href="http://z.jbalogh.me/font-awesome.css">
+    <link rel="stylesheet" href="font-awesome.css">
     <style>
       * {
         margin: 0;
@@ -36,7 +36,7 @@
       h1 {
         margin: 10px 0 10px 5px;
         padding-left: 30px;
-        background: url(http://z.jbalogh.me/logo.png) left top no-repeat;
+        background: url(logo.png) left top no-repeat;
         font-size: 24px;
       }
       #tabs li:not(.selected),
@@ -259,7 +259,6 @@
       </ol>
       <div id="options" class="tab selected">
         <p style="margin-bottom: 1em"><b>Note:</b> Settings don't work yet.</p>
-        <form>
           <ol>
             <li><label><input name="banner" type="checkbox" disabled> Turn on notification banner</label></li>
             <li><label><input name="hour" type="checkbox" disabled> Pause notifications for 1 hour</label></li>
@@ -268,6 +267,22 @@
         </form>
       </div>
       <div id="site-settings" class="tab">
+        <script id="site-settings-template" type="text/template">
+          <p><b>Note:</b> Settings don't work yet.</p>
+          <ol>
+            {{#sites}}
+            <li>
+              <div>
+                <h3><img src="{{icon}}"> {{domain}} <time>{{latest}}</time></h3>
+                <ol class="site-options">
+                  <li class="pause-site" data-id="{{site}}"><b class="icon-pause"></b>Pause notifications for this site</li>
+                  <li class="kill-site" data-id="{{site}}"><b class="icon-remove"></b>Stop receiving notifications from this site</li>
+                </ol>
+              </div>
+            </li>
+            {{/sites}}
+          </ol>
+        </script>
       </div>
     </div>
 
@@ -278,7 +293,7 @@
     <script id="notifications-template" type="text/template">
       {{#sites}}
       <li>
-        <a href="http://{{domain}}"><h2><img src="{{icon}}"> {{name}}</h2></a>
+        <a href="http://{{site}}"><h2><img src="{{icon}}"> {{domain}}</h2></a>
         <ul>
           {{#notifications}}
           <li class="message {{#encrypted}}encrypted{{/encrypted}}">
@@ -295,21 +310,5 @@
       {{/sites}}
     </script>
 
-    <script id="site-settings-template" type="text/template">
-      <p><b>Note:</b> Settings don't work yet.</p>
-      <ol>
-        {{#sites}}
-        <li data-id="{{domain}}">
-          <div>
-            <h3><img src="{{icon}}"> {{domain}} <time>{{latest}}</time></h3>
-            <ol class="site-options">
-              <li>Pause notifications for this site</li>
-              <li class="delete-site"><b class="icon-remove"></b> Stop receiving notifications from this site</li>
-            </ol>
-          </div>
-        </li>
-        {{/sites}}
-      </ol>
-    </script>
   </body>
 </html>
