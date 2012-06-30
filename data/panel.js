@@ -83,14 +83,13 @@ document.addEventListener('click', function(e) {
       return
     }
     if (el.classList.contains('pause-site')) {
-      site = el.getAttribute('data-id');
-      self.port.emit('pause', site);
+      self.port.emit('pause', {'queue': el.getAttribute('data-queue'),
+                     'token': el.getAttribute('data-token')});
       return;
     }
     if (el.classList.contains('kill-site')) {
-      site = el.getAttribute('data-id');
-      console.debug('killing ', site);
-      self.port.emit('kill', site);
+      self.port.emit('kill', {'queue': el.getAttribute('data-queue'),
+                     'token': el.getAttribute('data-token')});
       return;
     }
   }
@@ -121,7 +120,7 @@ function selectTab(el) {
 function render() {
   var list = $('notifications'),
       template = $('notifications-template').textContent,
-      view = {sites:[]},
+      view = {settings:{},sites:[]},
       sites=[];
 
   dumpObj(notifications, 'rendering...');
@@ -152,7 +151,14 @@ function render() {
     site.notifications = groups[domain];
     view.sites.push(site);
   }
-  view['settings']['sites'] == DB.sites;
+
+  // because mustache.js
+  view.settings.sites = [];
+  if (DB.sites) {
+    Object.keys(DB.sites).sort().forEach(function(k) {
+      view.settings['sites'].push(DB.sites[k]);
+    })
+  }
 
   console.debug('render view', JSON.stringify(view),"\n DB", JSON.stringify(DB));
   list.innerHTML = Mustache.render(template, view);
@@ -179,14 +185,13 @@ function renderSettings(view) {
       console.debug("Settings: Adding site", JSON.stringify(e.site));
       view.sites.push({name: e.site || 'Unknown',
                        token: e.token,
-                       icon: icons[domain] || icons["default"],
+                       icon: icons[e.site] || icons["default"],
                        latest: e.prettyTime});
       sites[e.site] = true;
     }
   });
-  console.debug('notifications length', notifications.length);
   console.debug('Rendering settings', JSON.stringify(view));
-  list.innerHTML = Mustache.render(template, view);
+  list.innerHTML =Mustache.render(template, view);
 }
 
 var icons = {

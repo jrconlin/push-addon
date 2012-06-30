@@ -236,6 +236,9 @@
       .flipped #settings {
         display: block;
       }
+      .template {
+        display: none;
+      }
 
     </style>
   </head>
@@ -266,23 +269,25 @@
           </ol>
         </form>
       </div>
-      <div id="site-settings" class="tab">
-        <script id="site-settings-template" type="text/template">
+      <script id="site-settings-template" class="template" type="text/template">
           <p><b>Note:</b> Settings don't work yet.</p>
+          {{#settings}}
           <ol>
             {{#sites}}
             <li>
               <div>
-                <h3><img src="{{icon}}"> {{domain}} <time>{{latest}}</time></h3>
+                <h3><img src="{{icon}}"> {{name}} <time>{{latest}}</time></h3>
                 <ol class="site-options">
-                  <li class="pause-site" data-id="{{site}}"><b class="icon-pause"></b>Pause notifications for this site</li>
-                  <li class="kill-site" data-id="{{site}}"><b class="icon-remove"></b>Stop receiving notifications from this site</li>
+                  <li class="pause-site" data-queue="{{name}}" data-token="{{token}}"><b class="icon-pause"></b>Pause notifications for this site</li>
+                  <li class="kill-site" data-queue="{{name}}" data-token="{{token}}"><b class="icon-remove"></b>Stop receiving notifications from this site</li>
                 </ol>
               </div>
             </li>
             {{/sites}}
           </ol>
-        </script>
+          {{/settings}}
+      </script>
+      <div id="site-settings" class="tab">
       </div>
     </div>
 
@@ -290,7 +295,7 @@
       <i id="trash" title="Clear All" class="icon-trash"><span>Clear All</span></i>
     </div>
 
-    <script id="notifications-template" type="text/template">
+    <script id="notifications-template" class="template" type="text/template">
       {{#sites}}
       <li>
         <a href="http://{{site}}"><h2><img src="{{icon}}"> {{domain}}</h2></a>
