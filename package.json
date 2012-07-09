@@ -1,10 +1,10 @@
 {
     "name": "push-notifications",
     "license": "BSD",
-    "author": "jbalogh@mozilla.com",
+    "author": "jrconlin@mozilla.com, jbalogh@mozilla.com",
     "version": "0.2.6",
     "fullName": "Push Notifications",
-    "id": "push@jbalogh.me",
+    "id": "push@services.mozilla.org",
     "description": "Demo of push notifications for Firefox.",
 
     "preferences": [

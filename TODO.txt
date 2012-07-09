@@ -1,0 +1,18 @@
+Notifications Addon TODOs
+
+* Add Notification distribution to other plug-ins.
+  Concept: Plugins would register as consumers of "intents"
+  Notifications would be sent to those plugins (or user presented with a selector)
+  Unconsumed notifications would default to a user facing display.
+    Work Notes: May be able to do this via an observer and custom events
+        Probably should build off of the webintent model.
+        There's an issue with the jetpack/sdk and how it creates observers (see main.js)
+
+* finish up UI panel for pause/delete notifications.
+    (delete works, pause does not.)
+    Need to factor in pause on server (helps with pause sync coordination
+        and loss)
+Ideally, the UI elements would be done by UX team and included. 
+That's probably not going to happen.
+
+(See PUSH server code for additional work items.)
