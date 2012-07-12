@@ -130,7 +130,7 @@ function selectTab(el) {
 function render() {
   var list = $('notifications'),
       template = $('notifications-template').textContent,
-      view = {settings:{},sites:[]},
+      view = {sites:[], settings:{}},
       sites=[];
 
   dumpObj(notifications, 'rendering...');
