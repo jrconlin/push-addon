@@ -179,7 +179,7 @@ function renderSettings(view) {
       console.debug("Settings: Adding site", JSON.stringify(e.site));
       view.sites.push({name: e.site || 'Unknown',
                        token: e.token,
-                       icon: icons[domain] || icons["default"],
+                       icon: icons[e.site] || icons["default"],
                        latest: e.prettyTime});
       sites[e.site] = true;
     }
